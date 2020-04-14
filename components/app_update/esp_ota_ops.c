@@ -67,8 +67,9 @@ static bool is_ota_partition(const esp_partition_t *p)
 {
     return (p != NULL
             && p->type == ESP_PARTITION_TYPE_APP
-            && p->subtype >= ESP_PARTITION_SUBTYPE_APP_OTA_0
-            && p->subtype < ESP_PARTITION_SUBTYPE_APP_OTA_MAX);
+            && ((p->subtype >= ESP_PARTITION_SUBTYPE_APP_OTA_0
+            	&& p->subtype < ESP_PARTITION_SUBTYPE_APP_OTA_MAX)
+            	||(p->subtype == ESP_PARTITION_SUBTYPE_APP_FACTORY)));
 }
 
 // Read otadata partition and fill array from two otadata structures.
